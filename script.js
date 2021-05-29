@@ -1,9 +1,11 @@
-function tabNavigationInit() {
+const ACTIVE_CLASS = 'ativo';
+
+function initTabNavigation() {
   const tabMenu = document.querySelectorAll('.js-tabmenu li');
   const tabContent = document.querySelectorAll('.js-tabcontent section');
 
   if (tabMenu.length && tabContent.length) {
-    tabContent[0].classList.add(activeClass);
+    tabContent[0].classList.add(ACTIVE_CLASS);
 
     function activeTab(index) {
       tabContent.forEach((section) => {
@@ -17,20 +19,45 @@ function tabNavigationInit() {
     });
   }
 }
-tabNavigationInit();
+initTabNavigation();
 
-function accordionList() {
+function initAccordionList() {
   const accordionList = document.querySelectorAll('.js-accordion dt');
-  const activeClass = 'ativo';
 
   function activeAccordion() {
-    this.classList.toggle(activeClass);
-    this.nextElementSibling.classList.toggle(activeClass);
+    this.classList.toggle(ACTIVE_CLASS);
+    this.nextElementSibling.classList.toggle(ACTIVE_CLASS);
   }
 
   accordionList.forEach((item) =>
     item.addEventListener('click', activeAccordion)
   );
 }
+initAccordionList();
 
-accordionList();
+function initSmoothScrolling() {
+  const linksInternos = document.querySelectorAll('.js-menu a[href^="#"]');
+
+  function scrollToSection(event) {
+    event.preventDefault();
+    const href = event.currentTarget.getAttribute('href');
+    const section = document.querySelector(href);
+
+    section.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+
+    // Forma Alternativa
+    // const topo = section.offsetTop;
+    // window.scrollTo({
+    //   top: topo,
+    //   behavior: smooth,
+    // });
+  }
+
+  linksInternos.forEach((link) => {
+    link.addEventListener('click', scrollToSection);
+  });
+}
+initSmoothScrolling();
