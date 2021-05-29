@@ -47,13 +47,6 @@ function initSmoothScrolling() {
       behavior: 'smooth',
       block: 'start',
     });
-
-    // Forma Alternativa
-    // const topo = section.offsetTop;
-    // window.scrollTo({
-    //   top: topo,
-    //   behavior: smooth,
-    // });
   }
 
   linksInternos.forEach((link) => {
