@@ -3,7 +3,7 @@ function tabNavigationInit() {
   const tabContent = document.querySelectorAll('.js-tabcontent section');
 
   if (tabMenu.length && tabContent.length) {
-    tabContent[0].classList.add('ativo');
+    tabContent[0].classList.add(activeClass);
 
     function activeTab(index) {
       tabContent.forEach((section) => {
@@ -19,13 +19,18 @@ function tabNavigationInit() {
 }
 tabNavigationInit();
 
-const accordionList = document.querySelectorAll('.js-accordion dt');
+function accordionList() {
+  const accordionList = document.querySelectorAll('.js-accordion dt');
+  const activeClass = 'ativo';
 
-function activeAccordion() {
-  this.classList.add('ativo');
-  this.nextElementSibling.classList.add('ativo');
+  function activeAccordion() {
+    this.classList.toggle(activeClass);
+    this.nextElementSibling.classList.toggle(activeClass);
+  }
+
+  accordionList.forEach((item) =>
+    item.addEventListener('click', activeAccordion)
+  );
 }
 
-accordionList.forEach((item) =>
-  item.addEventListener('click', activeAccordion)
-);
+accordionList();
