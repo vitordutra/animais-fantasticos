@@ -54,3 +54,28 @@ function initSmoothScrolling() {
   });
 }
 initSmoothScrolling();
+
+function initScrollAnimation() {
+  const sections = document.querySelectorAll('.js-scroll');
+
+  const sectionsExist = sections.length;
+  if (sectionsExist) {
+    const halfWindow = window.innerHeight * 0.6;
+    function animateScroll() {
+      sections.forEach((section) => {
+        // getBoundingClientRect -> Método que retorna um objeto com valores de
+        //width, height, distâncias do elemento e mais.
+        const sectionTop = section.getBoundingClientRect().top;
+        const isSectionVisible = sectionTop - halfWindow < 0;
+        console.log(isSectionVisible);
+        if (isSectionVisible) {
+          section.classList.add(ACTIVE_CLASS);
+        }
+      });
+    }
+    animateScroll();
+
+    window.addEventListener('scroll', animateScroll);
+  }
+}
+initScrollAnimation();
